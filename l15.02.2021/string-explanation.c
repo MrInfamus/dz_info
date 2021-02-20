@@ -48,7 +48,7 @@ int mystrlen(const char str[]) {
 int scan_string(char str[], int max_size) {
     int i;
     for(i = 0; i < max_size && (str[i] = getchar())!='\n'; i++);
-    if(i >= max_size) return 0;
+    if(i >= max_size){str[i-1] = '\0'; return 0;}
     return 1;
 }
 
