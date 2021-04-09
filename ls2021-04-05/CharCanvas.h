@@ -43,6 +43,22 @@ void initCharCanvas(CharCanvas *canvas, int height, int width) {
     fillCharCanvas(canvas, ' ');
 }
 
+void initCharCanvasWithSymbol(CharCanvas *canvas, int width, int height, char symbol)
+{
+    canvas->width = width;
+    canvas->height = height;
+    canvas->data = (char**)malloc(height * sizeof(char*));
+    if(canvas->data == NULL) exit(-1);
+    for(int i = 0; i < height; i++){
+        canvas->data[i] = (char*)malloc(width * sizeof(char));
+        if(canvas->data[i] == NULL) {
+            finalizeCharCanvas(canvas);
+            exit(-1);
+        }
+    }
+    fillCharCanvas(canvas, symbol); 
+}
+
 /**
  * This function is designed to reinitialize the array without losing data in it.
  * @param canvas CharCanvas*
@@ -50,7 +66,7 @@ void initCharCanvas(CharCanvas *canvas, int height, int width) {
  * @param width  new width
  * @param sim    the symbol for filling new sells in the canvas
  */
-void ReInitCharCanvas(CharCanvas *canvas, int height, int width, char sim)
+void ReInitCharCanvasWithSymbol(CharCanvas *canvas, int height, int width, char sim)
 {
     if(canvas->height > height || canvas->width > width) exit(-1);
     canvas->data = (char**)realloc(canvas->data, height * sizeof(char*));
@@ -72,6 +88,36 @@ void ReInitCharCanvas(CharCanvas *canvas, int height, int width, char sim)
         for(int j = 0; j < width; j++)
         {
             canvas->data[i][j] = sim;
+        }
+    }
+
+    canvas->height = height;
+    canvas->width = width;
+}
+
+
+void ReInitCharCanvas(CharCanvas *canvas, int height, int width)
+{
+    if(canvas->height > height || canvas->width > width) exit(-1);
+    canvas->data = (char**)realloc(canvas->data, height * sizeof(char*));
+    if(canvas->data == NULL) {finalizeCharCanvas(canvas); exit(-1);}
+    for(int i = 0; i < height; i++)
+    {
+        canvas->data[i] = (char*)realloc(canvas->data[i], width * sizeof(char*));
+        if(canvas->data[i] == NULL) {finalizeCharCanvas(canvas); exit(-1);}
+    }
+    for(int i = 0; i < canvas->height; i++)
+    {
+        for(int j = canvas->width; j < width; j++)
+        {
+            canvas->data[i][j] = ' ';
+        }
+    }
+    for(int i = canvas->height; i < height; i++)
+    {
+        for(int j = 0; j < width; j++)
+        {
+            canvas->data[i][j] = ' ';
         }
     }
 
