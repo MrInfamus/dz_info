@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "IntVector2d.h"
 
 #pragma once
 //----------------------------------------------------------------------------

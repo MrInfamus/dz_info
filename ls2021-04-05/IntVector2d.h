@@ -23,7 +23,7 @@ IntVector2d makeVector2d(int x, int y) {
 }
 
 void printIntVector2d(IntVector2d v) {
-	printf("(&d, &d)\n", v.x, v.y);
+	printf("(%d, %d)\n", v.x, v.y);
 }
 
 IntVector2d askAndScanIntVector2d(void) {
