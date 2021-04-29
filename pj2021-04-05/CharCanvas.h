@@ -67,7 +67,7 @@ void initCharCanvasWithSymbol(CharCanvas *canvas, int width, int height, char sy
  * @param width  new width
  * @param sim    the symbol for filling new sells in the canvas
  */
-void ReInitCharCanvasWithSymbol(CharCanvas *canvas, int height, int width, char sim)
+void ReSizeCharCanvasWithSymbol(CharCanvas *canvas, int height, int width, char sim)
 {
     if(canvas->height > height || canvas->width > width) exit(-1);
     canvas->data = (char**)realloc(canvas->data, height * sizeof(char*));
@@ -97,11 +97,11 @@ void ReInitCharCanvasWithSymbol(CharCanvas *canvas, int height, int width, char 
 }
 
 
-void ReInitCharCanvas(CharCanvas *canvas, int height, int width)
+void ReSizeCharCanvas(CharCanvas *canvas, int height, int width)
 {
-    if(canvas->height > height || canvas->width > width) exit(-1);
+    //if(canvas->height > height || canvas->width > width) exit(-1);
     canvas->data = (char**)realloc(canvas->data, height * sizeof(char*));
-    if(canvas->data == NULL) {finalizeCharCanvas(canvas); exit(-1);}
+    //if(canvas->data == NULL) {finalizeCharCanvas(canvas); exit(-1);}
     for(int i = 0; i < height; i++)
     {
         canvas->data[i] = (char*)realloc(canvas->data[i], width * sizeof(char*));
@@ -150,33 +150,7 @@ void pointAtCharCanvas(CharCanvas *canvas, IntVector2d position, char symbol) {
     // it is not a mistake: 'x' corresponds to horizontal coordinate (width)
 }
 
-/*
-
-int main(void) {
-
-    CharCanvas canvas;
-
-    initCharCanvas(&canvas, 3, 5);
+void printErrorForCharCanvas(int code)
+{
     
-    fillCharCanvas(&canvas, '.');
-    printCharCanvas(&canvas);
-    printf(" #0:\n");
-    ReInitCharCanvas(&canvas, 50, 75, '.');
-    printCharCanvas(&canvas);
-
-    
-    printf(" #1:\n");
-    
-
-    pointAtCharCanvas(&canvas, makeVector2d(2, 3), '@');
-    printf(" #2:\n");
-    printCharCanvas(&canvas);
-
-    pointAtCharCanvas(&canvas, makeVector2d(4, 1), '%');
-    printf(" #3:\n");
-    printCharCanvas(&canvas);
-    
-    finalizeCharCanvas(&canvas);
-    return 0;
 }
-*/

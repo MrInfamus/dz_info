@@ -10,12 +10,11 @@ int main()
 
 	CharCanvas canvas, canvas0;
 
-	initCharCanvasWithSymbol(&canvas, 10, 10, '!');
+	initCharCanvasWithSymbol(&canvas, 7, 10, '!');
 
 	initCharCanvas(&canvas0, 11, 10);
 	pointAtCharCanvas(&canvas, v, '#');
-
-	//writeCharCanvasToFile(&canvas, "test.txt");
+	writeCharCanvasToFile(&canvas, "test.txt");
 
 	printCharCanvas(&canvas);
 	printf("-----------------\n");

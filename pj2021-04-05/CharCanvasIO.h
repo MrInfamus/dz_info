@@ -5,12 +5,18 @@
 int readCharCanvasFromFile(CharCanvas *canvas, const char filepath[])
 {
     FILE *fp;
+    int h,w;
 
     if ((fp = fopen(filepath, "r")) == NULL) {
         printf("Error! File cannot be opened.");
         // Program exits if the file pointer returns NULL.
-        exit(1);
+        return -1;
     }
+
+    fscanf(fp, "%d %d\n", &h, &w);
+    //printf("%d %D\n", h, w);
+
+    ReSizeCharCanvas(canvas, h, w);
 
 	for(int i = 0; i < canvas->height; i++)
 	{
@@ -28,6 +34,12 @@ int readCharCanvasFromFile(CharCanvas *canvas, const char filepath[])
 
 int readCharCanvasFromStream(CharCanvas *canvas, FILE *fp)
 {
+    int h,w;
+    fscanf(fp, "%d %d\n", &h, &w);
+
+
+    ReSizeCharCanvas(canvas, h, w);
+
 	for(int i = 0; i < canvas->height; i++)
 	{
 		int sym = '!';
@@ -46,10 +58,10 @@ int writeCharCanvasToFile(const CharCanvas *canvas, const char filepath[])
     FILE *fp;
 
     if ((fp = fopen(filepath, "w")) == NULL) {
-        printf("Error! File cannot be opened.");
-        // Program exits if the file pointer returns NULL.
-        exit(1);
+    	return -1;
     }
+
+    fprintf(fp, "%d %d\n", canvas->height, canvas->width);
 
 	for(int i = 0; i < canvas->height; i++)
 	{
@@ -65,6 +77,8 @@ int writeCharCanvasToFile(const CharCanvas *canvas, const char filepath[])
 
 int writeCharCanvasToStream(const CharCanvas *canvas, FILE *fp)
 {
+	fprintf(fp, "%d %d\n", canvas->height, canvas->width);
+
 	for(int i = 0; i < canvas->height; i++)
 	{
 		for(int j = 0; j < canvas->width; j++)
