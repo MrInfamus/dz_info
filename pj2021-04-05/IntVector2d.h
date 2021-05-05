@@ -29,6 +29,6 @@ void printIntVector2d(IntVector2d v) {
 IntVector2d askAndScanIntVector2d(void) {
 	int x, y;
 	printf("Pleace, enter your coordinates:");
-	scanf("%d %d", &x, &y);
+	scanf("%d%d", &x, &y);
 	return makeVector2d(x, y);
 }

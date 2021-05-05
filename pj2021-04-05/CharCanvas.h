@@ -69,9 +69,9 @@ void initCharCanvasWithSymbol(CharCanvas *canvas, int width, int height, char sy
  */
 void ReSizeCharCanvasWithSymbol(CharCanvas *canvas, int height, int width, char sim)
 {
-    if(canvas->height > height || canvas->width > width) exit(-1);
+    //if(canvas->height > height || canvas->width > width) exit(-1);
     canvas->data = (char**)realloc(canvas->data, height * sizeof(char*));
-    if(canvas->data == NULL) {finalizeCharCanvas(canvas); exit(-1);}
+    //if(canvas->data == NULL) {finalizeCharCanvas(canvas); exit(-1);}
     for(int i = 0; i < height; i++)
     {
         canvas->data[i] = (char*)realloc(canvas->data[i], width * sizeof(char*));
@@ -152,5 +152,10 @@ void pointAtCharCanvas(CharCanvas *canvas, IntVector2d position, char symbol) {
 
 void printErrorForCharCanvas(int code)
 {
-    
+    switch(code)
+    {
+        case(0): printf("No Error!\n");
+        case(1): printf("Error! File cannot be opened.\n");
+        default: printf("Undefined Erorr\n");
+    }
 }
