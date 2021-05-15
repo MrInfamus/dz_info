@@ -25,7 +25,7 @@ int readCharCanvasFromFile(CharCanvas *canvas, const char filepath[])
 
     fscanf(fp, "%d %d\n", &h, &w);
    	
-    printf("%d %d\n", h, w);
+    //printf("%d %d\n", h, w);
 
     ReSizeCharCanvas(canvas, h, w);
 

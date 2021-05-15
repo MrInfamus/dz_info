@@ -4,6 +4,7 @@
 #include "hasharr.h"
 
 DECLARE_PACKEGE(char)
+DECLARE_PACKEGE(Hasharr_char)
 
 #define MAX(a, b) \
 	(a > b ? a : b)
@@ -34,7 +35,7 @@ int main()
 	int l = strlen(s); 
 	for(int i = 0; i < l; i++) {
 		switch(s[i]){
-			case '0':{a+= mypow(10, l - i - 1) * 0; break;}
+			case '0':{a+=                        0; break;}
 			case '1':{a+= mypow(10, l - i - 1) * 1; break;}
 			case '2':{a+= mypow(10, l - i - 1) * 2; break;}
 			case '3':{a+= mypow(10, l - i - 1) * 3; break;}
@@ -48,8 +49,6 @@ int main()
 		}
 		
 	}
-	printf("%d\n", a);
-	a = a + (a % (mypow(10, l-k)));
 	printf("%d\n", a);
 	return 0;
 }

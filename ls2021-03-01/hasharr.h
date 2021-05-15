@@ -110,23 +110,23 @@ char* concat(const char *s1, const char *s2)
 		hasharr->count += ind1; \
 	}
 
-#define DECLARE_FIND(type) \
+#define DECLARE_FIND(type, func) \
 	int find_##type(const Hasharr_##type *hasharr, type item) \
 	{ \
 		for(int i = 0; i < hasharr->index; i++) \
 		{ \
-			if(hasharr->array[i]==item) return i; \
+			if(func(hasharr->array[i], item)) return i; \
 		} \
 		return -1; \
 	}
 
-#define DECLARE_COUNT(type) \
+#define DECLARE_COUNT(type, func) \
 	int count_##type(const Hasharr_##type *hasharr, type item) \
 	{ \
 		int counter = 0; \
 		for(int i = 0; i < hasharr->index; i++) \
 		{ \
-			if(hasharr->array[i] == item) counter++; \
+			if(func(hasharr->array[i],item)) counter++; \
 		} \
 		return counter; \
 	}
@@ -171,8 +171,10 @@ char* concat(const char *s1, const char *s2)
 #define DECLARE_STANDART(type) \
 	int length_##type(const Hasharr_##type hasharr) {return hasharr.index;} \
 	type get_##type(const Hasharr_##type hasharr, int ind) {return (hasharr.array)[ind];} \
-	void set_##type(Hasharr_##type *hasharr, int ind, int item) {if(ind <= hasharr->index) hasharr->array[ind] = item; else printf("Error, you out the index!\n");} \
+	void set_##type(Hasharr_##type *hasharr, int ind, type item) {if(ind <= hasharr->index) hasharr->array[ind] = item; else printf("Error, you out the index!\n");} \
 	void change_step_##type(Hasharr_##type *hasharr, int step) {(hasharr->step) = (unsigned int)step;}
+
+
 
 #define DECLARE_PACKEGE(type) \
 	DECLARE_HASHARR(type) \
@@ -188,7 +190,7 @@ char* concat(const char *s1, const char *s2)
 	DECLARE_REMOVE(type) \
 	DECLARE_REMOVEINTERVAL(type) \
 	\
-	DECLARE_COUNT(type) \
-	DECLARE_FIND(type) \
+	//DECLARE_COUNT(type) \
+	//DECLARE_FIND(type) \
 	\
 	DECLARE_PRINT(type)

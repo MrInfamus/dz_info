@@ -9,7 +9,7 @@ int main()
 {	
 	CharCanvas canvas;
 	initCharCanvas(&canvas, 0, 0);
-	int result = readCharCanvasFromFile(&canvas, PATH"test.txt");
+	int result = readCharCanvasFromFile(&canvas, PATH"test987.txt");
 	int h, w;
 	char c;
 	
@@ -30,7 +30,7 @@ int main()
 
 	//initCharCanvas(&canvas0, 11, 10);
 	pointAtCharCanvas(&canvas, v, '#');
-	int codeError = writeCharCanvasToFile(&canvas, PATH"test.txt");
+	int codeError = writeCharCanvasToFile(&canvas, PATH"test987.txt");
 	if(codeError)printErrorForCharCanvas(codeError);
 
 	printCharCanvas(&canvas);
